@@ -62,7 +62,7 @@ func (t *TimerTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 		t.Inner = http.DefaultTransport
 	}
 	res, err := t.Inner.RoundTrip(req)
-	log.Printf(Green("[DEBUG]")+"RoundTrip costs %s", time.Now().Sub(begin).String())
+	log.Printf(Green("[DEBUG]")+" RoundTrip costs %s", time.Now().Sub(begin).String())
 	return res, err
 }
 
@@ -74,7 +74,7 @@ func (t *CurlPrinterTransport) RoundTrip(req *http.Request) (*http.Response, err
 	if t.Inner == nil {
 		t.Inner = http.DefaultTransport
 	}
-	log.Printf(Green("[DEBUG]")+"generated cURL command:\n\t%s\n", GenCurl(req))
+	log.Printf(Green("[DEBUG]")+" generated cURL command:\n\t%s\n", GenCurl(req))
 	return t.Inner.RoundTrip(req)
 }
 

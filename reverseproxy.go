@@ -31,7 +31,8 @@ func WrapReverseProxy(ctx context.Context, proxy *httputil.ReverseProxy, filters
 			modifierFilters = append(modifierFilters, filter)
 		}
 	}
-	proxy.Transport = WrapRoundTripper(ctx, proxy.Transport, streamFilters...)
+	//proxy.Transport = WrapRoundTripper(ctx, proxy.Transport, streamFilters...)
 	proxy.ModifyResponse = WrapModifier(ctx, proxy.ModifyResponse, modifierFilters...)
+	proxy.ModifyResponse = WapModifierWithStreamFilter(ctx, proxy.ModifyResponse, streamFilters...)
 	return WrapHTTPHandler(ctx, proxy, requestFilters...)
 }
