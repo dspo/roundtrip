@@ -72,9 +72,9 @@ func WrapRoundTrip(ctx context.Context, roundTrip func(req *http.Request) (*http
 							log.Printf(Red("[ERROR]")+"failed to %T.OnResponseEOF, err: %v", filters[0], err)
 							return
 						}
+						nextReader = nextWriter.Bytes()
+						nextWriter.Reset()
 					}
-					nextReader = nextWriter.Bytes()
-					nextWriter.Reset()
 					return
 				}
 			}
